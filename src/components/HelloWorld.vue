@@ -3,26 +3,34 @@
         <el-container>
             <el-header>
                 <el-menu
-                    :default-active="activeIndex"
-                    class="el-menu-demo"
-                    mode="vertical"
-                    @select="handleSelect"
-                    active-text-color="blue">
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="vertical"
+                        @select="handleSelect"
+                        active-text-color="blue">
                     <el-menu-item index="1">知乎</el-menu-item>
                     <el-menu-item index="2">v2ex</el-menu-item>
                     <el-menu-item index="3">步行街</el-menu-item>
+                    <el-menu-item index="4">羊毛线报</el-menu-item>
                 </el-menu>
             </el-header>
             <el-main>
-                <el-form :label-position="left">
-                    <el-row v-for="(item,index) in data" :key="index">
-                        <el-col :span="15" offset="8">
-                            <div class="grid-content bg-purple-dark">
-                                <i class="el-icon-search"></i>
+                <el-form>
+                    <el-row v-for="(item, index) in data" :key="index">
+                        <el-col :span=15 offset= "8">
+                            <div v-if="activeIndexTem == 4">
+                                <el-collapse v-model="activeName" accordion>
+                                    <el-collapse-item :title="item.title" :name="index">
+                                        <div>{{item.tex}}</div>
+                                    </el-collapse-item>
+                                </el-collapse>
+                            </div>
+                            <div v-else class="grid-content bg-purple-dark">
                                 <a :href="[item.url]" target="_blank" rel="noopener">
-                                <span v-if="item.hot">
-                                <el-tag type="danger" style="width: 80px">{{item.hot}}万HOT</el-tag>&nbsp;
-                                </span>{{item.title}}</a>
+                                    <el-tag>{{index + 1}}</el-tag>
+                                    <!--                                <span v-if="item.hot">-->
+                                    <!--                                <el-tag type="danger" style="width: 80px">{{item.hot}}万HOT</el-tag>&nbsp;-->
+                                    {{item.title}}</a>
                             </div>
                         </el-col>
                     </el-row>
@@ -43,7 +51,9 @@
         data() {
             return {
                 data: [],
-                activeIndex: '1'
+                activeIndex: '1',
+                activeName: '1',
+                activeIndexTem: '1'
             }
         },
         created() {
@@ -51,6 +61,7 @@
             https.fetchGet('getInfo', param).then(res => {
                 this.data = res.data
             }).catch(err => {
+                // eslint-disable-next-line no-console
                 console.log(err)
             })
         },
@@ -60,6 +71,7 @@
                 https.fetchGet('getInfo', param).then(res => {
                     // console.log(res)
                     this.data = res.data
+                    this.activeIndexTem = key
                 }).catch(err => {
                     // eslint-disable-next-line no-console
                     console.log(err)
