@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-container>
+        <el-row>
             <el-header>
                 <el-menu
                         :default-active="activeIndex"
@@ -8,35 +8,48 @@
                         mode="vertical"
                         @select="handleSelect"
                         active-text-color="blue">
-                    <el-menu-item index="1">知乎</el-menu-item>
-                    <el-menu-item index="2">v2ex</el-menu-item>
-                    <el-menu-item index="3">步行街</el-menu-item>
-                    <el-menu-item index="4">羊毛线报</el-menu-item>
+                    <el-menu-item index="1" style="font-size: 17px">知乎</el-menu-item>
+                    <el-menu-item index="2" style="font-size: 17px">v2ex</el-menu-item>
+                    <el-menu-item index="3" style="font-size: 17px">步行街</el-menu-item>
+                    <el-menu-item index="4" style="font-size: 17px">羊毛线报</el-menu-item>
                 </el-menu>
             </el-header>
-            <el-main>
-                <el-form>
-                    <el-row v-for="(item, index) in data" :key="index">
-                        <el-col :span=15 offset= "8">
-                            <div v-if="activeIndexTem == 4">
-                                <el-collapse v-model="activeName" accordion>
-                                    <el-collapse-item :title="item.title" :name="index">
-                                        <div>{{item.tex}}</div>
-                                    </el-collapse-item>
-                                </el-collapse>
-                            </div>
-                            <div v-else class="grid-content bg-purple-dark">
-                                <a :href="[item.url]" target="_blank" rel="noopener">
-                                    <el-tag>{{index + 1}}</el-tag>
-                                    <!--                                <span v-if="item.hot">-->
-                                    <!--                                <el-tag type="danger" style="width: 80px">{{item.hot}}万HOT</el-tag>&nbsp;-->
-                                    {{item.title}}</a>
-                            </div>
-                        </el-col>
-                    </el-row>
-                </el-form>
-            </el-main>
-        </el-container>
+                <el-card class="box-card">
+                    <el-container>
+                        <el-main>
+                            <el-form>
+                                <el-row v-for="(item, index) in data" :key="index">
+                                    <el-col :span=10 offset="8">
+                                        <div v-if="activeIndexTem == 4">
+                                            <el-collapse v-model="activeName" accordion>
+                                                <el-collapse-item>
+<!--                                                <el-collapse-item :title="item.title" :name="index" >-->
+                                                    <template slot="title">
+                                                       <span style="color: #409EFF"> {{item.title}}</span>
+                                                    </template>
+
+                                                    <div v-html="item.tex" style="background-color: #67C23A"></div>
+                                                </el-collapse-item>
+                                            </el-collapse>
+                                        </div>
+                                        <div v-else class="grid-content bg-purple-dark">
+                                            <a :href="[item.url]" target="_blank" rel="noopener">
+                                                <el-tag>{{index + 1}}</el-tag>
+                                                <!--                                <span v-if="item.hot">-->
+                                                <!--                                <el-tag type="danger" style="width: 80px">{{item.hot}}万HOT</el-tag>&nbsp;-->
+                                                {{item.title}}</a>
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                            </el-form>
+                        </el-main>
+                    </el-container>
+                </el-card>
+        </el-row>
+
+<!--        <img src="http://img.zuanke8.com/forum/201910/08/094246dufmyxbdj4jbqy5d.png">-->
+        <img src="http://img.zuanke8.com/forum/201910/08/102440pl5ksch6mvyzt4lp.jpg">
+
     </div>
 </template>
 
@@ -163,5 +176,16 @@
 
     .el-menu-demo {
         margin-bottom: 20px;
+    }
+
+    .box-card {
+        margin: 0 auto;
+        width: 80%;
+        height: 100%;
+        /*margin-bottom: 22px;*/
+    }
+
+    .el-collapse-item__header {
+        background-color: gray;
     }
 </style>
