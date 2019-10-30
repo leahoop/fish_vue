@@ -46,9 +46,7 @@
                     </el-container>
                 </el-card>
         </el-row>
-
-<!--        <img src="http://img.zuanke8.com/forum/201910/08/094246dufmyxbdj4jbqy5d.png">-->
-        <img src="http://img.zuanke8.com/forum/201910/08/102440pl5ksch6mvyzt4lp.jpg">
+        <el-footer><a href="http://www.miitbeian.gov.cn">粤ICP备19137780号-1</a></el-footer>
 
     </div>
 </template>
