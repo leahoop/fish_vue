@@ -8,12 +8,11 @@
                         mode="vertical"
                         @select="handleSelect"
                         active-text-color="blue"
-
                         >
-                    <el-menu-item index="1" style="font-size: 15px">知乎</el-menu-item>
-                    <el-menu-item index="2" style="font-size: 15px">v2ex</el-menu-item>
-                    <el-menu-item index="3" style="font-size: 15px">步行街</el-menu-item>
-                    <el-menu-item index="4" style="font-size: 15px">一碗毒鸡汤</el-menu-item>
+                    <el-menu-item index="1">知乎</el-menu-item>
+                    <el-menu-item index="2">v2ex</el-menu-item>
+                    <el-menu-item index="3">步行街</el-menu-item>
+                    <el-menu-item index="4">一碗毒鸡汤</el-menu-item>
                 </el-menu>
             </el-col>
             <el-card class="box-card">
@@ -42,7 +41,7 @@
                     </div>
 
                     <el-row v-else v-for="(item, index) in data" :key="index">
-                        <el-col :xs="24" :sm="24" :lg="12">
+                        <el-col :xs="24" :sm="24" :lg="18">
                             <div class="grid-content bg-purple-dark">
                                 <a :href="[item.url]" target="_blank" rel="noopener">
                                     <el-tag>{{index + 1}}</el-tag>
