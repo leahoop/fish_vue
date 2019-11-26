@@ -1,50 +1,59 @@
 <template>
     <div>
         <el-row>
-            <el-header>
+            <el-col :xs="24" :sm="24" :lg="12">
                 <el-menu
                         :default-active="activeIndex"
                         class="el-menu-demo"
                         mode="vertical"
                         @select="handleSelect"
-                        active-text-color="blue">
-                    <el-menu-item index="1" style="font-size: 17px">知乎</el-menu-item>
-                    <el-menu-item index="2" style="font-size: 17px">v2ex</el-menu-item>
-                    <el-menu-item index="3" style="font-size: 17px">步行街</el-menu-item>
-                    <el-menu-item index="4" style="font-size: 17px">羊毛线报</el-menu-item>
-                </el-menu>
-            </el-header>
-                <el-card class="box-card">
-                    <el-container>
-                        <el-main>
-                            <el-form>
-                                <el-row v-for="(item, index) in data" :key="index">
-                                    <el-col :span=10 offset="8">
-                                        <div v-if="activeIndexTem == 4">
-                                            <el-collapse v-model="activeName" accordion>
-                                                <el-collapse-item>
-<!--                                                <el-collapse-item :title="item.title" :name="index" >-->
-                                                    <template slot="title">
-                                                       <span style="color: #409EFF"> {{item.title}}</span>
-                                                    </template>
+                        active-text-color="blue"
 
-                                                    <div v-html="item.tex" style="background-color: #67C23A"></div>
-                                                </el-collapse-item>
-                                            </el-collapse>
-                                        </div>
-                                        <div v-else class="grid-content bg-purple-dark">
-                                            <a :href="[item.url]" target="_blank" rel="noopener">
-                                                <el-tag>{{index + 1}}</el-tag>
-                                                <!--                                <span v-if="item.hot">-->
-                                                <!--                                <el-tag type="danger" style="width: 80px">{{item.hot}}万HOT</el-tag>&nbsp;-->
-                                                {{item.title}}</a>
-                                        </div>
-                                    </el-col>
-                                </el-row>
-                            </el-form>
-                        </el-main>
-                    </el-container>
-                </el-card>
+                        >
+                    <el-menu-item index="1" style="font-size: 15px">知乎</el-menu-item>
+                    <el-menu-item index="2" style="font-size: 15px">v2ex</el-menu-item>
+                    <el-menu-item index="3" style="font-size: 15px">步行街</el-menu-item>
+                    <el-menu-item index="4" style="font-size: 15px">一碗毒鸡汤</el-menu-item>
+                </el-menu>
+            </el-col>
+            <el-card class="box-card">
+                <el-form>
+
+                    <div v-if="activeIndexTem == 4">
+                       <div >
+                           <el-row :gutter="36">
+                               <el-col :xs="24" :sm="24" :lg="12">
+                                   <span class="grid-content">{{ data[0].content}}</span>
+                               </el-col>
+                           </el-row>
+                       </div>
+                        <div>
+                            <el-button type="primary" size="small" @click="handleSelect(4)">换汤不换药</el-button>
+                        </div>
+                        <!--<el-collapse v-model="activeName" accordion>
+                            <el-collapse-item>
+                                <template slot="title">
+                                    <span style="color: #409EFF"> {{item.title}}</span>
+                                </template>
+
+                                <div v-html="item.tex" style="background-color: #67C23A"></div>
+                            </el-collapse-item>
+                        </el-collapse>-->
+                    </div>
+
+                    <el-row v-else v-for="(item, index) in data" :key="index">
+                        <el-col :xs="24" :sm="24" :lg="12">
+                            <div class="grid-content bg-purple-dark">
+                                <a :href="[item.url]" target="_blank" rel="noopener">
+                                    <el-tag>{{index + 1}}</el-tag>
+                                    {{item.title}}
+                                </a>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </el-form>
+            </el-card>
+
         </el-row>
         <el-footer><a href="http://www.miitbeian.gov.cn">粤ICP备19137780号-1</a></el-footer>
 
@@ -77,7 +86,7 @@
             })
         },
         methods: {
-            handleSelect(key, keyPath) {
+            handleSelect(key) {
                 const param = {'key': key}
                 https.fetchGet('getInfo', param).then(res => {
                     // console.log(res)
@@ -95,25 +104,11 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-    .el-header, .el-footer {
+    el-header, el-footer {
         background-color: white;
         color: #333;
         text-align: center;
-        line-height: 60px;
-    }
-
-    .el-aside {
-        background-color: white;
-        color: #333;
-        text-align: center;
-        /*line-height: 200px;*/
-    }
-
-    .el-main {
-        background-color: white;
-        color: #333;
-        text-align: left;
-        /*line-height: 160px;*/
+        line-height: 40px;
     }
 
     h3 {
@@ -137,7 +132,6 @@
 
     .el-row {
         margin-bottom: 20px;
-
     &
     :last-child {
         margin-bottom: 0;
@@ -152,24 +146,12 @@
         background: white;
     }
 
-    .bg-purple {
-        background: white;
-    }
-
-    .bg-purple-light {
-        background: white;
-    }
-
     .grid-content {
+        text-align: left;
         border-radius: 4px;
         min-height: 36px;
         /*margin: 0 auto;*/
-        display: block;
-    }
-
-    .row-bg {
-        padding: 10px 0;
-        background-color: #f9fafc;
+        display: flex;
     }
 
     .el-menu-demo {
@@ -177,13 +159,10 @@
     }
 
     .box-card {
+        min-height: 400px;
         margin: 0 auto;
         width: 80%;
         height: 100%;
         /*margin-bottom: 22px;*/
-    }
-
-    .el-collapse-item__header {
-        background-color: gray;
     }
 </style>
