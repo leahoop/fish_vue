@@ -12,7 +12,9 @@
     "core-js": "^2.6.5",
     "element-ui": "^2.10.0",
     "qs": "^6.7.0",
-    "vue": "^2.6.10"
+    "video.js": "^7.6.6",
+    "vue": "^2.6.10",
+    "vue-video-player": "^5.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
@@ -21,7 +23,8 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vue-router": "3.0.2"
   },
   "eslintConfig": {
     "root": true,
